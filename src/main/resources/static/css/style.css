@@ -1,0 +1,86 @@
+.mytable {
+  width: 100%; 
+  height: 40%; 
+  background-color: #142953;
+  text-align:center;  
+  
+}
+.myp {
+  color: white; 
+  font-family: "Lucida Console", "Lucida Sans Typewriter", Monaco, "Bitstream Vera Sans Mono", monospace;  
+  font-size: 50px;
+}
+
+.myspan {
+	float:right; 
+	padding-top: 10px; 
+	text-align:right;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+.gi-6x{font-size: 6em;}
+.gi-7x{font-size: 7em;}
+.gi-8x{font-size: 8em;}
+.gi-9x{font-size: 9em;}
+.gi-10x{font-size: 10em;}
+.gi-20x{font-size: 20em;}
+
+.btn2{opacity:.50;display:inline-block;padding: 100px 100px 110px 110px;font-size:14px;font-weight:400;line-height:1.42857143;text-align:center;white-space:nowrap;vertical-align:middle;-ms-touch-action:manipulation;touch-action:manipulation;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;background-image:none;border:1px solid transparent;border-radius:4px}
+.btn2.active.focus,.btn2.active:focus,.btn2.focus,.btn2:active.focus,.btn2:active:focus,.btn2:focus{outline:thin dotted;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
+.btn2.focus,.btn2:focus,.btn2:hover{color:#333;text-decoration:none}
+.btn2.active,.btn2:active{background-image:none;outline:0;-webkit-box-shadow:inset 0 3px 5px rgba(0,0,0,.125);box-shadow:inset 0 3px 5px rgba(0,0,0,.125)}
+.btn2.disabled,.btn2[disabled],fieldset[disabled] .btn2{cursor:not-allowed;filter:alpha(opacity=65);-webkit-box-shadow:none;box-shadow:none;opacity:.65}
+
+.btn-plus{color:#999;background-color:#fff;border-color:#bbb}
+.btn-plus.focus,.btn-plus:focus{color:#777;background-color:#e6e6e6;border-color:#bbb}
+.btn-plus:hover{color:#777;background-color:#e6e6e6;border-color:#bbb}
+.btn-plus.active,.btn-plus:active{color:#777;background-color:#e6e6e6;border-color:#bbb}
+.btn-plus.active.focus,.btn-plus.active:focus,.btn-plus.active:hover,.btn-plus:active.focus,.btn-plus:active:focus,.btn-plus:active:hover,.open>.dropdown-toggle.btn-plus.focus,.open>.dropdown-toggle.btn-plus:focus,.open>.dropdown-toggle.btn-plus:hover{color:#777;background-color:#d4d4d4;border-color:#bbb}
+.btn-plus.active,.btn-plus:active,.open>.dropdown-toggle.btn-plus{background-image:none}
+.btn-plus.disabled,.btn-plus.disabled.active,.btn-plus.disabled.focus,.btn-plus.disabled:active,.btn-plus.disabled:focus,.btn-plus.disabled:hover,.btn-plus[disabled],.btn-plus[disabled].active,.btn-plus[disabled].focus,.btn-plus[disabled]:active,.btn-plus[disabled]:focus,.btn-plus[disabled]:hover,fieldset[disabled] .btn-plus,fieldset[disabled] .btn-plus.active,fieldset[disabled] .btn-plus.focus,fieldset[disabled] .btn-plus:active,fieldset[disabled] .btn-plus:focus,fieldset[disabled] .btn-plus:hover{background-color:#eee;border-color:#eee}
+.btn-plus .badge{color:#bbb;background-color:#777}
+
+.col-prueba{
+  position:relative;
+  min-height:1px;
+  padding-right:15px;
+  padding-left:15px;
+  float:left;
+  width:100%;
+}
+
+
+
+.col-checkbox-label{
+  position:relative;
+  min-height:1px;
+  padding-right:15px;
+  padding-left:15px;
+  float:left;
+  width:95%;
+  font-weight:400;
+}

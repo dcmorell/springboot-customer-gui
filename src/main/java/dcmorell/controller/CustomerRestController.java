@@ -14,28 +14,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-public class CustomerController {
+@RestController
+public class CustomerRestController {
 
-	private final Logger log = LoggerFactory.getLogger(CustomerController.class);
+	private final Logger log = LoggerFactory.getLogger(CustomerRestController.class);
 	
-	private CustomerService customerService;
-	
-	@Autowired
+    private CustomerService customerService;
+    private MediaType jsonMediaType = MediaType.APPLICATION_JSON;
+    
+    @Autowired
     public void getCustomerService(CustomerService customerService) {
         this.customerService = customerService;
         this.customerService.initCustomers();
     }
-	
-    @RequestMapping(value = "/gui/customers", method = RequestMethod.GET)
-    public String getCustomersModel(Model model) {
-    	log.info("/gui/customers");
-    	
-    	model.addAttribute("customers", customerService.listAll());
-        return "customers2";
+
+    @RequestMapping(value = "/customers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Customer> getCustomers() {
+        log.info("/customers");
+    	Iterable<Customer> customers = customerService.listAll();
+        return customers;
     }
-    
-    /*
+
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Customer getCustomer(@PathVariable("id") Integer id) {
         Customer customer = customerService.getCustomerById(id);
@@ -70,5 +69,5 @@ public class CustomerController {
         }
     }
 
-*/
+
 }
