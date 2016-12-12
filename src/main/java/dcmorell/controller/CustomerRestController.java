@@ -3,54 +3,43 @@ package dcmorell.controller;
 import dcmorell.model.Customer;
 import dcmorell.service.CustomerService;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-public class CustomerController {
+@RestController
+public class CustomerRestController {
 
-	private final Logger log = LoggerFactory.getLogger(CustomerController.class);
+	private final Logger log = LoggerFactory.getLogger(CustomerRestController.class);
 	
-	private CustomerService customerService;
-	
-	@Autowired
+    private CustomerService customerService;
+    private MediaType jsonMediaType = MediaType.APPLICATION_JSON;
+    
+    @Autowired
     public void getCustomerService(CustomerService customerService) {
         this.customerService = customerService;
         this.customerService.initCustomers();
     }
-	
-    @RequestMapping(value = "/gui/customers", method = RequestMethod.GET)
-    public String getCustomersModel(Model model) {
-    	log.info("/gui/customers");
-    	
-    	model.addAttribute("customers", customerService.listAll());
-        return "customers2";
+
+    @RequestMapping(value = "/customers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Iterable<Customer> getCustomers() {
+        log.info("/customers");
+    	Iterable<Customer> customers = customerService.listAll();
+        return customers;
     }
-    
-    /*@RequestMapping(value = "/customers/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Customer getCustomer(@PathVariable("id") Integer id) {
         Customer customer = customerService.getCustomerById(id);
         return customer;
-    }*/
-
-    @RequestMapping(value = "/gui/customers/add", method = RequestMethod.GET)
-	public String addCustomer(Model model){
-    	log.info("/gui/customers/add");
-    	
-		model.addAttribute("customer", new Customer());
-		return "customerform";
-	}
+    }
     
-    @RequestMapping(value = "/gui/customers/add", method = RequestMethod.POST)
-    public String addCustomer(@RequestParam("name") String name,
+    @RequestMapping(value = "/customers/add", method = RequestMethod.POST)
+    public Customer addCustomerResponse(@RequestParam("name") String name,
                                 @RequestParam(name = "address", defaultValue = "") String address,
                                 @RequestParam(name = "phone", defaultValue = "") String phone) {
         Customer customer = new Customer();
@@ -64,16 +53,20 @@ public class CustomerController {
             log.error("Error when saving the Custormer");
             return null;
         }
-        return "customerok";
+        return customer;
     }
 
-    @RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE)
-    public void deleteCustomer(@PathVariable("id") Integer id) {
-        log.info("Customer to Id to Delete: " + id);
+    @RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String deleteCustomer(@PathVariable("id") Integer id) {
+        String response = "";
+    	log.info("Customer to Id to Delete: " + id);
         try {
             customerService.deleteCustomer(id);
+            response = "ok";
         } catch(EmptyResultDataAccessException e) {
             log.error("Custormer not found");
+            response = e.toString();
         }
+        return response;
     }
 }

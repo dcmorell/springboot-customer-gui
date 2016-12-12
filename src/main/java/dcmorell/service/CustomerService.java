@@ -4,6 +4,8 @@ import dcmorell.model.Customer;
 
 public interface CustomerService {
 
+	void initCustomers();
+	
     Iterable<Customer> listAll();
 
     Customer getCustomerById(Integer id);
