@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 @Controller
 public class CustomerController {
 
@@ -27,7 +28,7 @@ public class CustomerController {
         this.customerService.initCustomers();
     }
 	
-    @RequestMapping(value = "/gui/customers", method = RequestMethod.GET)
+    @RequestMapping(value = "/gui/customers")
     public String getCustomersModel(Model model) {
     	log.info("/gui/customers");
     	
@@ -50,16 +51,11 @@ public class CustomerController {
 	}
     
     @RequestMapping(value = "/gui/customers/add", method = RequestMethod.POST)
-    public String addCustomer(@RequestParam("name") String name,
-                                @RequestParam(name = "address", defaultValue = "") String address,
-                                @RequestParam(name = "phone", defaultValue = "") String phone) {
-        Customer customer = new Customer();
-        customer.setName(name);
-        customer.setAddress(address);
-        customer.setPhone(phone);
+    public String addCustomer(@ModelAttribute Customer customer, Model model) {
         log.info("Customer to Save: " + customer);
         try {
             customerService.saveCustomer(customer);
+            model.addAttribute("customer", customer);
         } catch(Exception e) {
             log.error("Error when saving the Custormer");
             return null;
