@@ -26,10 +26,10 @@
 										<th>
 											Address
 										</th>
-										<th>
+										<th> 
 											Phone
 										</th>
-										<!-- <th></th>-->
+										<th colspan="2"></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -43,6 +43,11 @@
 										</td>
 										<td>
 											<a class="btn btn-primary" href="#" th:href="${'/customer/' + customer.id + '/delete?id=' + customer.getId()}">Delete</a>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="6">
+											<a class="btn" href="#" th:href="${'/gui/customers/add'}">Add</a>
 										</td>
 									</tr>
 								</tbody>

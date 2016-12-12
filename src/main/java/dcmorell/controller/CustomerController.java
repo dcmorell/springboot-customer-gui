@@ -35,15 +35,22 @@ public class CustomerController {
         return "customers2";
     }
     
-    /*
-    @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    /*@RequestMapping(value = "/customers/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Customer getCustomer(@PathVariable("id") Integer id) {
         Customer customer = customerService.getCustomerById(id);
         return customer;
-    }
+    }*/
 
-    @RequestMapping(value = "/customers", method = RequestMethod.POST)
-    public Customer addCustomer(@RequestParam("name") String name,
+    @RequestMapping(value = "/gui/customers/add", method = RequestMethod.GET)
+	public String addCustomer(Model model){
+    	log.info("/gui/customers/add");
+    	
+		model.addAttribute("customer", new Customer());
+		return "customerform";
+	}
+    
+    @RequestMapping(value = "/gui/customers/add", method = RequestMethod.POST)
+    public String addCustomer(@RequestParam("name") String name,
                                 @RequestParam(name = "address", defaultValue = "") String address,
                                 @RequestParam(name = "phone", defaultValue = "") String phone) {
         Customer customer = new Customer();
@@ -57,7 +64,7 @@ public class CustomerController {
             log.error("Error when saving the Custormer");
             return null;
         }
-        return customer;
+        return "customerok";
     }
 
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE)
@@ -69,6 +76,4 @@ public class CustomerController {
             log.error("Custormer not found");
         }
     }
-
-*/
 }

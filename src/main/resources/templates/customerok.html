@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head lang="en">
+
+    <title>Add Customer</title>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    
+  </head>
+  <body>
+      	<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<form class="form-horizontal" th:object="${customer}" th:action="@{/gui/customers}" method="post">
+						<div class="alert alert-success alert-dismissable">
+							 
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+								×
+							</button>
+							<h4>
+								Customer added!
+							</h4> 
+							<strong>Customer added!</strong> Customer <label th:text="${customer.name}"/> was added correctly.
+						</div>
+						<div class="row">
+			                <button type="submit" class="btn btn-default">Inicio</button>
+			            </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
