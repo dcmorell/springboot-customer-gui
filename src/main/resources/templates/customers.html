@@ -39,10 +39,10 @@
 										<td th:text="${customer.getAddress()}"></td>
 										<td th:text="${customer.getPhone()}"></td>
 										<td>
-											<a class="btn btn-primary" href="#" th:href="${'/customer/' + customer.id + '/modify?id=' + customer.getId()}">Modify</a>
+											<a class="btn btn-primary" href="#" th:href="${'/gui/customers/update/' + customer.getId()}">Modify</a>
 										</td>
 										<td>
-											<a class="btn btn-primary" href="#" th:href="${'/customer/' + customer.id + '/delete?id=' + customer.getId()}">Delete</a>
+											<a class="btn btn-primary" href="#" th:href="${'/gui/customers/delete/' + customer.getId()}">Delete</a>
 										</td>
 									</tr>
 								</tbody>
