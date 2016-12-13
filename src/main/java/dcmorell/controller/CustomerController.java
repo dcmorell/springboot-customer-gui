@@ -33,7 +33,7 @@ public class CustomerController {
     	log.info("/gui/customers");
     	
     	model.addAttribute("customers", customerService.listAll());
-        return "customers2";
+        return "customers";
     }
     
     /*@RequestMapping(value = "/customers/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -63,7 +63,7 @@ public class CustomerController {
         return "customerok";
     }
 
-    @RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/customers/delete/{id}", method = RequestMethod.DELETE)
     public void deleteCustomer(@PathVariable("id") Integer id) {
         log.info("Customer to Id to Delete: " + id);
         try {
@@ -71,5 +71,31 @@ public class CustomerController {
         } catch(EmptyResultDataAccessException e) {
             log.error("Custormer not found");
         }
+    }
+    
+    @RequestMapping(value = "/gui/customers/update/{id}")
+	public String updateCustomerGet(@PathVariable("id") Integer id, Model model){
+    	log.info("/gui/customers/update/" + id);
+    	
+    	Customer oldCustomer = customerService.getCustomerById(id);
+    	
+		model.addAttribute("oldCustomer", oldCustomer);
+		return "customerupdate";
+	}
+    
+    @RequestMapping(value = "/gui/customers/update/{id}", method = RequestMethod.POST)
+    public String updateCustomer(@PathVariable("id") Integer id, Customer oldCustomer) {
+        log.info("Customer to Id to Modify: " + id);
+        try {
+            Customer newCustomer = customerService.getCustomerById(id);
+            newCustomer.setAddress(oldCustomer.getAddress());
+            newCustomer.setName(oldCustomer.getName());
+            newCustomer.setPhone(oldCustomer.getPhone());
+            customerService.saveCustomer(newCustomer);
+          }
+          catch (Exception ex) {
+            return "Error updating the user: " + ex.toString();
+          }
+        return "customerok";
     }
 }
