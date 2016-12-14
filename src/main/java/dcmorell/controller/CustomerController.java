@@ -36,16 +36,11 @@ public class CustomerController {
         return "customers";
     }
     
-    /*@RequestMapping(value = "/customers/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Customer getCustomer(@PathVariable("id") Integer id) {
-        Customer customer = customerService.getCustomerById(id);
-        return customer;
-    }*/
-
     @RequestMapping(value = "/gui/customers/add", method = RequestMethod.GET)
 	public String addCustomer(Model model){
     	log.info("/gui/customers/add");
     	
+    	model.addAttribute("type", "add");
 		model.addAttribute("customer", new Customer());
 		return "customerform";
 	}
@@ -55,6 +50,7 @@ public class CustomerController {
         log.info("Customer to Save: " + customer);
         try {
             customerService.saveCustomer(customer);
+            model.addAttribute("type", "add");
             model.addAttribute("customer", customer);
         } catch(Exception e) {
             log.error("Error when saving the Custormer");
@@ -79,12 +75,13 @@ public class CustomerController {
     	
     	Customer oldCustomer = customerService.getCustomerById(id);
     	
-		model.addAttribute("oldCustomer", oldCustomer);
-		return "customerupdate";
+    	model.addAttribute("type", "update/" + id);
+		model.addAttribute("customer", oldCustomer);
+		return "customerform";
 	}
     
     @RequestMapping(value = "/gui/customers/update/{id}", method = RequestMethod.POST)
-    public String updateCustomer(@PathVariable("id") Integer id, Customer oldCustomer) {
+    public String updateCustomer(@PathVariable("id") Integer id, Customer oldCustomer, Model model) {
         log.info("Customer to Id to Modify: " + id);
         try {
             Customer newCustomer = customerService.getCustomerById(id);
@@ -92,6 +89,8 @@ public class CustomerController {
             newCustomer.setName(oldCustomer.getName());
             newCustomer.setPhone(oldCustomer.getPhone());
             customerService.saveCustomer(newCustomer);
+            model.addAttribute("type", "modify");
+            model.addAttribute("customer", newCustomer);
           }
           catch (Exception ex) {
             return "Error updating the user: " + ex.toString();
